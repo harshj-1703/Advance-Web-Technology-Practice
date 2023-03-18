@@ -17,6 +17,13 @@ app.get("/sum",function (req,resp) {
     resp.send("sum is : "+(parseFloat(a)+parseFloat(b)));
 })
 
+app.get("/simpleinterest",function (req,resp) {
+    const p = req.query.p;
+    const r = req.query.r;
+    const n = req.query.n;
+    resp.send("I = "+((parseFloat(p)*parseFloat(r)*parseFloat(n))/100));
+})
+
 app.listen(port,() => {
     console.log(`server is up on ${port}`);
 })

@@ -14,6 +14,14 @@ app.get("/account/list",(req,res)=>{
     const accounts = getAccountDetails();
     res.send(accounts);
 })
+
+app.post("/account/add",(req,res)=>{
+    const accounts = getAccountDetails()
+    const newAccId = Math.floor(100000 + Math.random() * 20000)
+    accounts[newAccId] = req.body
+    console.log(accounts)
+});
+
 //start server
 app.listen(port,()=>{
     console.log(`server started on port ${port}`);

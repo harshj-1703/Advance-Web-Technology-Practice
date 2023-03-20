@@ -24,11 +24,21 @@ app.post("/account/add",(req,res)=>{
     res.send({success:true, msg:'new account added!!!'});
 });
 
+app.put("/account/:id",(req,res)=>{
+    const accounts = getAccountDetails()
+    const id = req.params['id']
+    console.log(id);
+    accounts[id] = req.body;
+    saveAccountDetails(accounts)
+    res.send({success:true, msg:`account with ${id} updated`})
+});
+
 //start server
 app.listen(port,()=>{
     console.log(`server started on port ${port}`);
 });
 
+//functions
 const getAccountDetails = ()=>{
     const data = fs.readFileSync(filePath)
     return JSON.parse(data);

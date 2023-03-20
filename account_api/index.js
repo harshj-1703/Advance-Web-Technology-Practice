@@ -19,7 +19,9 @@ app.post("/account/add",(req,res)=>{
     const accounts = getAccountDetails()
     const newAccId = Math.floor(100000 + Math.random() * 20000)
     accounts[newAccId] = req.body
-    console.log(accounts)
+    console.log(accounts);
+    saveAccountDetails(accounts)
+    res.send({success:true, msg:'new account added!!!'});
 });
 
 //start server
@@ -33,6 +35,8 @@ const getAccountDetails = ()=>{
 }
 
 const saveAccountDetails = (user) =>{
-    const user = JSON.stringify(user)
-    fs.writeFileSync(filePath,)
+    const usr = JSON.stringify(user)
+    fs.writeFileSync(filePath,usr,function(err){
+        
+    })
 }

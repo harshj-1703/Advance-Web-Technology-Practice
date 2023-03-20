@@ -31,3 +31,8 @@ const getAccountDetails = ()=>{
     const data = fs.readFileSync(filePath)
     return JSON.parse(data);
 }
+
+const saveAccountDetails = (user) =>{
+    const user = JSON.stringify(user)
+    fs.writeFileSync(filePath,)
+}

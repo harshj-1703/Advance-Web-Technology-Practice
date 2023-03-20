@@ -33,6 +33,15 @@ app.put("/account/:id",(req,res)=>{
     res.send({success:true, msg:`account with ${id} updated`})
 });
 
+app.delete("/account/:id",(req,resp)=>{
+    const accounts = getAccountDetails()
+    const id = req.params['id']
+    console.log(id);
+    delete accounts[id];
+    saveAccountDetails(accounts);
+    resp.send({success:true, msg:`account with ${id} deleted`})
+})
+
 //start server
 app.listen(port,()=>{
     console.log(`server started on port ${port}`);

@@ -1,15 +1,23 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import React from "react";
 import Home from "./components/Home";
+import AddBlog from "./components/AddBlog";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
-function App() {
+const App = () => {
   return (
-    <>
-      <Home />
-    </>
+    <BrowserRouter>
+      <div className="container-fluid">
+        {/* <AddBlog /> */}
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/add" element={<AddBlog />}></Route>
+        </Routes>
+        {/* <Home /> */}
+      </div>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

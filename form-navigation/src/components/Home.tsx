@@ -5,18 +5,8 @@ const Home = () => {
   const handleClick = () => {
     console.log("Button clicked from home ");
   };
-  const handleClickWarning = (e: MouseEvent<HTMLButtonElement>) => {
-    console.log("Warning Button clicked from home ", e.target);
-  };
   return (
     <>
-      {/* Welcome to my website
-      <Button handleClick={handleClick} color="primary">
-        This is test button
-      </Button>
-      <Button handleClick={handleClickWarning} color="warning">
-        This is warning button
-      </Button> */}
       <form>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Title</label>

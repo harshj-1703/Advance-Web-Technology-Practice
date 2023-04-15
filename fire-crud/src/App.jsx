@@ -1,21 +1,27 @@
 import React from "react";
-import { useState } from "react";
-// import "./App.css";
-import { Col, Container, Row } from "react-bootstrap";
-import BookList from "./components/BookList";
+import { Container, Row, Col } from "react-bootstrap";
+import AddBook from "./components/AddBook";
+import BookLists from "./components/BookLists";
 
-function App() {
+const App = () => {
   return (
     <>
       <Container>
         <Row>
           <Col>
-            <BookList />
+            <AddBook />
+          </Col>
+        </Row>
+      </Container>
+      <Container>
+        <Row>
+          <Col>
+            <BookLists></BookLists>
           </Col>
         </Row>
       </Container>
     </>
   );
-}
+};
 
 export default App;

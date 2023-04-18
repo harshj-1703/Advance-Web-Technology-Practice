@@ -1,14 +1,20 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const AddBlog = () => {
-  const [formData, setFormData] = useState({ title: "", description: "" });
+const UpdateBlog = () => {
+  const location = useLocation();
+  const jsonData = location.state;
+  const id = jsonData.blogs._id;
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    title: jsonData.blogs.title,
+    description: jsonData.blogs.description,
+  });
 
   //POST add data
-  const addData = async () => {
-    const response = await fetch("http://localhost:5000/api/blog/", {
-      method: "POST",
+  const updateData = async () => {
+    const response = await fetch("http://localhost:5000/api/blog/" + id, {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title: formData.title,
@@ -16,7 +22,7 @@ const AddBlog = () => {
       }),
     });
     const jsonData = await response.json();
-    console.log("addblog", jsonData);
+    console.log("updateblog", jsonData);
     navigate("/");
   };
 
@@ -24,7 +30,7 @@ const AddBlog = () => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     console.log(formData);
-    addData();
+    updateData();
   };
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -47,6 +53,7 @@ const AddBlog = () => {
             name="title"
             placeholder="Enter blog title"
             onChange={handleInput}
+            value={formData.title}
           />
         </div>
         <div className="mb-3">
@@ -59,14 +66,15 @@ const AddBlog = () => {
             id="description"
             name="description"
             onChange={handleInput}
+            value={formData.description}
           />
         </div>
         <button type="submit" className="btn btn-primary">
-          Save
+          Update
         </button>
       </div>
     </form>
   );
 };
 
-export default AddBlog;
+export default UpdateBlog;

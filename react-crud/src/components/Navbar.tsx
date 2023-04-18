@@ -8,7 +8,7 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link to="/" className="nav-link active">
+              <Link to="/" className="nav-link">
                 Home
               </Link>
             </li>
@@ -17,6 +17,11 @@ function Navbar() {
                 Add
               </Link>
             </li>
+            {/* <li className="nav-item">
+              <Link to="/update" className="nav-link">
+                Update
+              </Link>
+            </li> */}
           </ul>
         </div>
       </div>

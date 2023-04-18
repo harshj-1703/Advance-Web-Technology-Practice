@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import DeleteButton from "./DeleteButton";
+import UpdateButton from "./UpdateButton";
 
 const Home = () => {
   const [blogs, setBlogs] = useState([{ _id: "", title: "", description: "" }]);
@@ -25,6 +27,8 @@ const Home = () => {
               <th>Sr. No</th>
               <th>Title</th>
               <th>Description</th>
+              <th>Delete</th>
+              <th>Update</th>
             </tr>
           </thead>
           <tbody>
@@ -33,6 +37,13 @@ const Home = () => {
                 <td>{index + 1}</td>
                 <td>{blog.title}</td>
                 <td> {blog.description}</td>
+                {/* <td> {blog._id}</td> */}
+                <td>
+                  <DeleteButton _id={blog._id} />
+                </td>
+                <td>
+                  <UpdateButton _id={blog._id} />
+                </td>
               </tr>
             ))}
           </tbody>

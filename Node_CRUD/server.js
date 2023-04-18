@@ -3,7 +3,7 @@ const app = express()
 const port = 5000
 const cors = require('cors')
 
-app.use(cors({origin: 'http://localhost:5173'}))
+app.use(cors({origin: 'http://127.0.0.1:5173'}))
 
 //middleware
 app.use(express.json())

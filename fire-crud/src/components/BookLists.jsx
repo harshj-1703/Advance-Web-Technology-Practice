@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { bookService } from "../services/book.services";
+import DeleteBook from "./DeleteBook";
+import UpdateButton from "./UpdateButton";
 
 const BookLists = () => {
   const [books, setBooks] = useState([]);
@@ -12,16 +14,7 @@ const BookLists = () => {
     const data = await bookService.getAllBooks();
     console.log(data.docs);
     var newdata = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    // data.docs.map((doc)=>{
-    //     console.log(doc);
-    //     console.log(doc.data());
-    //     console.log(doc.id);
-    //     // {...doc.data(),
-    //     //     id: doc.id}
-    // }
-    // )
     console.log(newdata);
-    // setBooks(data.docs.map((doc)=>({...doc.data(), id: doc.id})))
     setBooks(newdata);
   };
   return (
@@ -33,15 +26,27 @@ const BookLists = () => {
             <th>Title</th>
             <th>Author</th>
             <th>Status</th>
+            <th colSpan={2}>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {books.map((book) => (
+          {books.map((book, index) => (
             <tr key={book.id}>
-              <td>{1}</td>
+              <td>{index + 1}</td>
               <td>{book.title}</td>
               <td>{book.author}</td>
               <td>{book.status}</td>
+              <td>
+                <DeleteBook id={book.id} />
+              </td>
+              <td>
+                <UpdateButton
+                  id={book.id}
+                  title={book.title}
+                  author={book.author}
+                  status={book.status}
+                />
+              </td>
             </tr>
           ))}
         </tbody>

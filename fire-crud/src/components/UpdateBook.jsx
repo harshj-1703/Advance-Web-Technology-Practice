@@ -1,30 +1,34 @@
 import React, { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { bookService } from "../services/book.services";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const AddBook = () => {
+const UpdateBook = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const jsonData = location.state;
   const [formData, setformData] = useState({
-    title: "",
-    author: "",
+    title: jsonData.title,
+    author: jsonData.author,
     status: "",
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-    addBook();
+    updateBook();
   };
-  const addBook = async () => {
+  const updateBook = async () => {
     const newBook = {
       title: formData.title,
       author: formData.author,
       status: formData.status,
     };
-    await bookService.addBook(newBook);
+    await bookService.updateBook(jsonData._id, newBook);
     setformData({
       title: "",
       author: "",
       status: "",
     });
-    window.location.reload();
+    navigate("/");
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,6 +69,7 @@ const AddBook = () => {
               aria-label="Default select example"
               onChange={handleChange}
               name="status"
+              value={jsonData.status || "Available"}
             >
               <option>Open this select menu</option>
               <option value="Available">Available</option>
@@ -73,11 +78,11 @@ const AddBook = () => {
           </InputGroup>
         </Form.Group>
         <Button variant="primary" type="submit">
-          Add
+          Update
         </Button>
       </Form>
     </div>
   );
 };
 
-export default AddBook;
+export default UpdateBook;

@@ -13,6 +13,10 @@ function JobDetails() {
     window.location.href = "mailto:" + job.contact;
   };
 
+  const handleContactClickMobile = () => {
+    window.location.href = "tel:" + job.mobile;
+  };
+
   useEffect(() => {
     getJob();
   }, []);
@@ -42,6 +46,11 @@ function JobDetails() {
         <div>{job.mobile}</div>
         <div>
           <button onClick={handleContactClick}>Contact With Email</button>
+        </div>
+        <div>
+          <button onClick={handleContactClickMobile}>
+            Contact With Mobile
+          </button>
         </div>
       </>
     );

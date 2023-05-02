@@ -39,6 +39,7 @@ function JobDetails() {
         <div>{job.dailyhours}</div>
         <div>{job.place}</div>
         <div>{job.contact}</div>
+        <div>{job.mobile}</div>
         <div>
           <button onClick={handleContactClick}>Contact With Email</button>
         </div>

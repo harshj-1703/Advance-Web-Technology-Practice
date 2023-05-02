@@ -38,6 +38,7 @@ function JobLists() {
             <th>Daily Hours</th>
             <th>Place</th>
             <th>Email Contact</th>
+            <th>Mobile Contact</th>
             <th>Apply</th>
           </tr>
         </thead>
@@ -54,6 +55,7 @@ function JobLists() {
               <td>{job.dailyhours}</td>
               <td>{job.place}</td>
               <td>{job.contact}</td>
+              <td>{job.mobile}</td>
               <td>
                 <ApplyJob id={job.id} />
               </td>

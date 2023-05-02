@@ -15,6 +15,7 @@ function AddJob() {
     place: "",
     contact: "",
     timestamp: "",
+    mobile: "",
   });
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -67,6 +68,7 @@ function AddJob() {
       place: "",
       contact: "",
       timestamp: "",
+      mobile: "",
     });
 
     setIsLoading(false);
@@ -184,6 +186,16 @@ function AddJob() {
             type="text"
             name="contact"
             value={job.contact}
+            onChange={handleInputChange}
+          />
+        </label>
+        <br />
+        <label>
+          Mobile Contact:
+          <input
+            type="text"
+            name="mobile"
+            value={job.mobile}
             onChange={handleInputChange}
           />
         </label>

@@ -179,7 +179,7 @@ function AddJob() {
         </label>
         <br />
         <label>
-          Contact:
+          Email Contact:
           <input
             type="text"
             name="contact"

@@ -37,7 +37,7 @@ function JobLists() {
             <th>Experience</th>
             <th>Daily Hours</th>
             <th>Place</th>
-            <th>Contact</th>
+            <th>Email Contact</th>
             <th>Apply</th>
           </tr>
         </thead>

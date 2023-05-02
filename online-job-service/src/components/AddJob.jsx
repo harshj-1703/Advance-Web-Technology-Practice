@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { jobServices } from "../services/job.services";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../firebase-config";
+import { v4 } from "uuid";
 
 function AddJob() {
   const [job, setJob] = useState({
-    // imageurl: "",
+    imageurl: "",
     name: "",
     salary: "",
     experience: "",
@@ -14,6 +17,17 @@ function AddJob() {
   });
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+  //image upload
+  const [imageUpload, setImageUpload] = useState(null);
+
+  const uploadFile = async () => {
+    if (imageUpload == null) return;
+    const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+    const snapshot = await uploadBytes(imageRef, imageUpload);
+    const url = await getDownloadURL(snapshot.ref);
+    return url;
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,9 +46,16 @@ function AddJob() {
       timeZoneName: "short",
       timeZone: "Asia/Kolkata",
     };
+
+    const imageUrl = await uploadFile();
+
     job.timestamp = new Date().toLocaleString("en-US", timestampOptions);
+    job.imageurl = imageUrl;
+
     await jobServices.addJob(job);
+
     setJob({
+      imageurl: "",
       name: "",
       salary: "",
       experience: "",
@@ -43,11 +64,12 @@ function AddJob() {
       contact: "",
       timestamp: "",
     });
+
     setShowSuccessMessage(true);
     setTimeout(() => {
       setShowSuccessMessage(false);
+      window.location.reload();
     }, 3000);
-    // window.location.reload();
   };
 
   const handleInputChange = (event) => {
@@ -74,6 +96,16 @@ function AddJob() {
             onChange={handleInputChange}
           />
         </label> */}
+        <input
+          type="file"
+          onClick={(event) => {
+            event.target.value = null;
+            setImageUpload(null);
+          }}
+          onChange={(event) => {
+            setImageUpload(event.target.files[0]);
+          }}
+        />
         <br />
         <label>
           Name:

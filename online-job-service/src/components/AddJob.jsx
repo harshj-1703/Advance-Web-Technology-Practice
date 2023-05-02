@@ -111,12 +111,12 @@ function AddJob() {
     setImageUpload(file);
   };
 
-  if (isLoading) {
-    return <Spinner animation="border" role="status" />;
-  }
+  // if (isLoading) {
+  //   return <Spinner animation="border" role="status" />;
+  // }
   return (
     <div>
-      {isLoading && <CircularProgress />}
+      {isLoading && <Spinner animation="border" role="status" />}
       {showSuccessMessage && <div>Job added successfully!</div>}
       <form onSubmit={handleSubmit}>
         <input

@@ -9,6 +9,10 @@ function JobDetails() {
   const [job, setJob] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const handleContactClick = () => {
+    window.location.href = "mailto:" + job.contact;
+  };
+
   useEffect(() => {
     getJob();
   }, []);
@@ -35,6 +39,9 @@ function JobDetails() {
         <div>{job.dailyhours}</div>
         <div>{job.place}</div>
         <div>{job.contact}</div>
+        <div>
+          <button onClick={handleContactClick}>Contact With Email</button>
+        </div>
       </>
     );
   }

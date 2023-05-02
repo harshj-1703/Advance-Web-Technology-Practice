@@ -4,8 +4,7 @@ import {
   addDoc,
   collection,
   getDocs,
-  deleteDoc,
-  updateDoc,
+  getDoc,
   orderBy,
   doc,
   query,
@@ -17,5 +16,9 @@ export const jobServices = {
   getAllJobs: () => {
     const queryRef = query(jobCollectionRef, orderBy("timestamp", "desc"));
     return getDocs(queryRef);
+  },
+  getJobById: (jobId) => {
+    const docRef = doc(jobCollectionRef, jobId);
+    return getDoc(docRef);
   },
 };

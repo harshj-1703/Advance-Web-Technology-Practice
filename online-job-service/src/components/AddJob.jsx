@@ -3,6 +3,7 @@ import { jobServices } from "../services/job.services";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase-config";
 import { v4 } from "uuid";
+import { Spinner } from "react-bootstrap";
 
 function AddJob() {
   const [job, setJob] = useState({
@@ -17,6 +18,7 @@ function AddJob() {
   });
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   //image upload
   const [imageUpload, setImageUpload] = useState(null);
@@ -29,10 +31,11 @@ function AddJob() {
     return url;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
     console.log(job);
-    addJob(job);
+    await addJob(job);
     event.target.reset();
   };
 
@@ -66,6 +69,7 @@ function AddJob() {
       timestamp: "",
     });
 
+    setIsLoading(false);
     setShowSuccessMessage(true);
     setTimeout(() => {
       setShowSuccessMessage(false);
@@ -107,8 +111,12 @@ function AddJob() {
     setImageUpload(file);
   };
 
+  if (isLoading) {
+    return <Spinner animation="border" role="status" />;
+  }
   return (
     <div>
+      {isLoading && <CircularProgress />}
       {showSuccessMessage && <div>Job added successfully!</div>}
       <form onSubmit={handleSubmit}>
         <input

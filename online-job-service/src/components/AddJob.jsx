@@ -33,6 +33,7 @@ function AddJob() {
     event.preventDefault();
     console.log(job);
     addJob(job);
+    event.target.reset();
   };
 
   const addJob = async (job) => {
@@ -68,8 +69,7 @@ function AddJob() {
     setShowSuccessMessage(true);
     setTimeout(() => {
       setShowSuccessMessage(false);
-      window.location.reload();
-    }, 3000);
+    }, 4000);
   };
 
   const handleInputChange = (event) => {
@@ -83,28 +83,41 @@ function AddJob() {
     }));
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    if (!file) {
+      setImageUpload(null);
+      return;
+    }
+
+    // Check if file type is jpeg, jpg or png
+    const fileType = file.type;
+    if (
+      fileType !== "image/jpeg" &&
+      fileType !== "image/jpg" &&
+      fileType !== "image/png"
+    ) {
+      alert("Please upload a jpeg, jpg, or png file.");
+      setImageUpload(null);
+      event.target.value = null;
+      return;
+    }
+
+    setImageUpload(file);
+  };
+
   return (
     <div>
       {showSuccessMessage && <div>Job added successfully!</div>}
       <form onSubmit={handleSubmit}>
-        {/* <label>
-          Image URL:
-          <input
-            type="text"
-            name="imageurl"
-            value={job.imageurl}
-            onChange={handleInputChange}
-          />
-        </label> */}
         <input
           type="file"
           onClick={(event) => {
             event.target.value = null;
             setImageUpload(null);
           }}
-          onChange={(event) => {
-            setImageUpload(event.target.files[0]);
-          }}
+          onChange={handleFileChange}
         />
         <br />
         <label>

@@ -21,4 +21,7 @@ export const jobServices = {
     const docRef = doc(jobCollectionRef, jobId);
     return getDoc(docRef);
   },
+  addJob: (newJob) => {
+    return addDoc(jobCollectionRef, newJob);
+  },
 };

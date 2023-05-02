@@ -18,7 +18,7 @@ function JobLists() {
     var newdata = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     // console.log(newdata);
     setJobs(newdata);
-    setIsLoading(false); // set loading status to false once data is loaded
+    setIsLoading(false);
   };
 
   if (isLoading) {

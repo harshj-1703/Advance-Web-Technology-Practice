@@ -4,6 +4,7 @@ import JobLists from "./components/JobLists";
 import JobDetails from "./components/JobDetails";
 import AddJob from "./components/AddJob";
 import Navbar from "./components/Navbar";
+import { Navigate } from "react-router-dom";
 
 const App = () => {
   return (
@@ -11,15 +12,19 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route path="/" element={<JobLists />}></Route>
           <Route
-            path="/"
+            path="/add"
             element={
-              <>
-                <JobLists />
-              </>
+              localStorage.getItem("email") ===
+              "harsh.jolapara110578@marwadiuniversity.ac.in" ? (
+                <AddJob />
+              ) : (
+                <Navigate to="/" replace />
+              )
             }
-          ></Route>
-          <Route path="/add" element={<AddJob />}></Route>
+          />
+
           <Route path="/jobdetails" element={<JobDetails />}></Route>
         </Routes>
       </BrowserRouter>

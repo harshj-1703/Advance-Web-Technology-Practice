@@ -4,7 +4,7 @@ import { Link, BrowserRouter, Routes, Route } from "react-router-dom";
 import JobLists from "./components/JobLists";
 import JobDetails from "./components/JobDetails";
 import AddJob from "./components/AddJob";
-import "./navbar.css"; // assuming you have created a separate CSS file for navbar
+import "./navbar.css";
 
 function Navbar() {
   return (

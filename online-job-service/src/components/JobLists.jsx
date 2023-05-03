@@ -3,7 +3,7 @@ import { Spinner, Table } from "react-bootstrap";
 import { jobServices } from "../services/job.services";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
-import "../joblist.css";
+import "../css/joblist.css";
 
 function JobLists() {
   const [jobs, setJobs] = useState([]);

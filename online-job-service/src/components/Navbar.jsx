@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../navbar.css";
-import myImage from "../assets/1.jpg";
+import "../css/navbar.css";
+import myImage from "../assets/images/1.jpg";
 import { signInWithGoogle, auth } from "../firebase-config";
 
 function handleSignOut() {

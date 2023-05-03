@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { jobServices } from "../services/job.services";
 import { Spinner } from "react-bootstrap";
-import "../jobDetails.css";
+import "../css/jobDetails.css";
 
 function JobDetails() {
   const location = useLocation();

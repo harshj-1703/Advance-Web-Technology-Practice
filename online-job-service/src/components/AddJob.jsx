@@ -4,7 +4,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase-config";
 import { v4 } from "uuid";
 import { Spinner } from "react-bootstrap";
-import "../addJob.css";
+import "../css/addJob.css";
 
 function AddJob() {
   const [job, setJob] = useState({

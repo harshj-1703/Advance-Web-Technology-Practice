@@ -116,13 +116,19 @@
     font-size: 1.1rem;
     font-weight: 500;
     outline: none;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 4px rgba(0, 110, 255, 0.525);
+    border: 2.5px solid transparent;
+    border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+    border-image-slice: 1;
     transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  .search-input::placeholder {
+    color: #999999;
   }
   
   .search-input:focus {
     border-color: #1e90ff;
     box-shadow: 0px 2px 4px rgba(30, 144, 255, 0.3);
   }
-  
   

@@ -54,8 +54,8 @@ function JobLists() {
           <img src={job.imageurl} alt={job.name} onLoad={handleImageLoad} />
         </div>
         <div className="job-details">
-          <div className="job-name">{job.name}</div>
-          <div className="job-salary">{job.salary}</div>
+          <div className="job-name1">{job.name}</div>
+          <div className="job-salary">SALARY: {job.salary} ₹</div>
           <div className="job-apply">
             <ApplyJob id={job.id} />
           </div>

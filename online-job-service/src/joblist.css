@@ -24,7 +24,7 @@
   .job-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 2rem;
+    grid-gap: 1.8rem;
   }
   
   .job-card {
@@ -41,7 +41,7 @@
     width: 100%;
     height: 300px;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 8px;
   }
   
   .job-image img {
@@ -63,16 +63,17 @@
     padding: 1rem;
   }
   
-  .job-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+  .job-name1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
   }
   
   .job-salary {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 0.5rem;
+    font-size: 17px;
+    color: #21116a;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
   }
   
   .job-apply {

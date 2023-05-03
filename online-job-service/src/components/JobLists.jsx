@@ -104,7 +104,11 @@ function ApplyJob({ id }) {
   const handleApply = () => {
     navigate("/jobdetails", { state: id });
   };
-  return <button onClick={handleApply}>Apply</button>;
+  return (
+    <button className="button-85" onClick={handleApply}>
+      Apply
+    </button>
+  );
 }
 
 export default JobLists;

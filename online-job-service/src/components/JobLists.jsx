@@ -59,7 +59,11 @@ function JobLists() {
     ));
 
   if (isLoading) {
-    return <Spinner animation="border" role="status" />;
+    return (
+      <div className="spinner-container">
+        <Spinner animation="border" role="status" variant="primary" />
+      </div>
+    );
   }
 
   return (

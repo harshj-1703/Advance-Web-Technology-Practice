@@ -2,7 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../navbar.css";
 import myImage from "../assets/1.jpg";
-import { signInWithGoogle } from "../firebase-config";
+import { signInWithGoogle, auth } from "../firebase-config";
+
+function handleSignOut() {
+  auth
+    .signOut()
+    .then(() => {
+      localStorage.clear();
+      window.location.href = "/";
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+}
 
 function Navbar() {
   return (
@@ -35,6 +47,13 @@ function Navbar() {
             "harsh.jolapara110578@marwadiuniversity.ac.in" && (
             <li>
               <Link to="/add">Add Job</Link>
+            </li>
+          )}
+          {localStorage.getItem("displayName") && (
+            <li>
+              <Link onClick={handleSignOut} className="signout">
+                SignOut
+              </Link>
             </li>
           )}
         </ul>

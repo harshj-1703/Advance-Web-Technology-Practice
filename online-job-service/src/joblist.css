@@ -67,11 +67,12 @@
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 0.2rem;
+    color: #0c2290;
   }
   
   .job-salary {
     font-size: 17px;
-    color: #21116a;
+    color: #4d4475;
     font-weight: 500;
     margin-bottom: 1.2rem;
   }

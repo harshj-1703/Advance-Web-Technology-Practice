@@ -10,7 +10,7 @@ function JobLists() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
-  const ITEMS_PER_PAGE = 6;
+  const ITEMS_PER_PAGE = 8;
   const [imgLoading, setImgLoading] = useState(true);
 
   function handleImageLoad() {

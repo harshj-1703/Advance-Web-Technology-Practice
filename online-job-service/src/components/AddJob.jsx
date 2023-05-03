@@ -4,6 +4,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase-config";
 import { v4 } from "uuid";
 import { Spinner } from "react-bootstrap";
+import "../addJob.css";
 
 function AddJob() {
   const [job, setJob] = useState({
@@ -118,18 +119,14 @@ function AddJob() {
   // }
   return (
     <div>
-      {isLoading && <Spinner animation="border" role="status" />}
-      {showSuccessMessage && <div>Job added successfully!</div>}
+      <h1 className="addjob-heading">Add Job</h1>
+      {isLoading && (
+        <div className="spinner-overlay">
+          <Spinner animation="border" role="status" variant="primary" />
+        </div>
+      )}
+      {showSuccessMessage && <div className="msg">Job added successfully!</div>}
       <form onSubmit={handleSubmit}>
-        <input
-          type="file"
-          onClick={(event) => {
-            event.target.value = null;
-            setImageUpload(null);
-          }}
-          onChange={handleFileChange}
-        />
-        <br />
         <label>
           Name:
           <input
@@ -139,7 +136,6 @@ function AddJob() {
             onChange={handleInputChange}
           />
         </label>
-        <br />
         <label>
           Salary:
           <input
@@ -149,7 +145,6 @@ function AddJob() {
             onChange={handleInputChange}
           />
         </label>
-        <br />
         <label>
           Experience:
           <input
@@ -159,7 +154,6 @@ function AddJob() {
             onChange={handleInputChange}
           />
         </label>
-        <br />
         <label>
           Daily Hours:
           <input
@@ -169,7 +163,6 @@ function AddJob() {
             onChange={handleInputChange}
           />
         </label>
-        <br />
         <label>
           Place:
           <input
@@ -179,17 +172,15 @@ function AddJob() {
             onChange={handleInputChange}
           />
         </label>
-        <br />
         <label>
           Email Contact:
           <input
-            type="text"
+            type="email"
             name="contact"
             value={job.contact}
             onChange={handleInputChange}
           />
         </label>
-        <br />
         <label>
           Mobile Contact:
           <input
@@ -197,9 +188,21 @@ function AddJob() {
             name="mobile"
             value={job.mobile}
             onChange={handleInputChange}
+            maxLength={10}
+            minLength={10}
           />
         </label>
-        <br />
+        <label>
+          Job Picture:
+          <input
+            type="file"
+            onClick={(event) => {
+              event.target.value = null;
+              setImageUpload(null);
+            }}
+            onChange={handleFileChange}
+          />
+        </label>
         <button type="submit">Submit</button>
       </form>
     </div>

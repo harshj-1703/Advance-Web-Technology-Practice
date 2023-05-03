@@ -11,6 +11,11 @@ function JobLists() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const ITEMS_PER_PAGE = 6;
+  const [imgLoading, setImgLoading] = useState(true);
+
+  function handleImageLoad() {
+    setImgLoading(false);
+  }
 
   useEffect(() => {
     getJobs();
@@ -45,8 +50,8 @@ function JobLists() {
     .slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE)
     .map((job, index) => (
       <div key={job.id} className="job-card">
-        <div className="job-image">
-          <img src={job.imageurl} alt={job.name} />
+        <div className={!imgLoading ? "job-image" : "loading"}>
+          <img src={job.imageurl} alt={job.name} onLoad={handleImageLoad} />
         </div>
         <div className="job-details">
           <div className="job-name">{job.name}</div>

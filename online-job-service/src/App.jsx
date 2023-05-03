@@ -1,5 +1,4 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import { Link, BrowserRouter, Routes, Route } from "react-router-dom";
 import JobLists from "./components/JobLists";
 import JobDetails from "./components/JobDetails";

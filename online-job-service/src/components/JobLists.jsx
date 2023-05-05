@@ -12,6 +12,7 @@ function JobLists() {
   const [currentPage, setCurrentPage] = useState(0);
   const ITEMS_PER_PAGE = 8;
   const [imgLoading, setImgLoading] = useState(true);
+  const [sortOrder, setSortOrder] = useState("newest");
 
   function handleImageLoad() {
     setImgLoading(false);
@@ -50,9 +51,23 @@ function JobLists() {
     setCurrentPage(selected);
   };
 
+  const handleSort = () => {
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
+
   const pageCount = Math.ceil(filteredJobs.length / ITEMS_PER_PAGE);
 
-  const displayJobs = filteredJobs
+  const displayJobs = (
+    sortOrder === "newest"
+      ? filteredJobs
+      : filteredJobs.sort((a, b) => {
+          if (sortOrder === "asc") {
+            return parseInt(a.salary) - parseInt(b.salary);
+          } else {
+            return parseInt(b.salary) - parseInt(a.salary);
+          }
+        })
+  )
     .slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE)
     .map((job, index) => (
       <div key={job.id} className="job-card">
@@ -88,6 +103,14 @@ function JobLists() {
           onChange={handleSearchChange}
           className="search-input"
         />
+        <select value={sortOrder} onChange={handleSort}>
+          <option value="" disabled>
+            Sort By
+          </option>
+          <option value="newest">Newest</option>
+          <option value="asc">Salary: Low to High</option>
+          <option value="desc">Salary: High to Low</option>
+        </select>
       </div>
 
       {displayJobs.length > 0 ? (

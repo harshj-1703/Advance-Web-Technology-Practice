@@ -30,9 +30,15 @@ function JobLists() {
     setIsLoading(false);
   };
 
-  const filteredJobs = jobs.filter((job) =>
-    job.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredJobs = jobs.filter((job) => {
+    const nameMatches = job.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const salaryMatches = job.salary
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    return nameMatches || salaryMatches;
+  });
 
   const handleSearchChange = (e) => {
     // console.log(e.target.value);
@@ -77,7 +83,7 @@ function JobLists() {
         <input
           type="text"
           name="search"
-          placeholder="Search By Name"
+          placeholder="Search By Name OR Salary"
           value={searchTerm}
           onChange={handleSearchChange}
           className="search-input"

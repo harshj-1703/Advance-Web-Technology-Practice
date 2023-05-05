@@ -139,16 +139,16 @@ function AddJob() {
         <label>
           Salary:
           <input
-            type="text"
+            type="number"
             name="salary"
             value={job.salary}
             onChange={handleInputChange}
           />
         </label>
         <label>
-          Experience:
+          Experience(in years):
           <input
-            type="text"
+            type="number"
             name="experience"
             value={job.experience}
             onChange={handleInputChange}
@@ -164,7 +164,7 @@ function AddJob() {
           />
         </label>
         <label>
-          Place:
+          Location:
           <input
             type="text"
             name="place"

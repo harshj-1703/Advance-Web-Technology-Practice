@@ -83,7 +83,7 @@ function JobLists() {
         <input
           type="text"
           name="search"
-          placeholder="Search By Name OR Salary"
+          placeholder="Search By Name Or Salary"
           value={searchTerm}
           onChange={handleSearchChange}
           className="search-input"

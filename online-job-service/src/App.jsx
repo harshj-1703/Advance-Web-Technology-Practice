@@ -5,6 +5,9 @@ import JobDetails from "./components/JobDetails";
 import AddJob from "./components/AddJob";
 import Navbar from "./components/Navbar";
 import { Navigate } from "react-router-dom";
+import ManageJobs from "./components/ManageJobs";
+
+const email = "harsh.jolapara110578@marwadiuniversity.ac.in";
 
 const App = () => {
   return (
@@ -16,9 +19,18 @@ const App = () => {
           <Route
             path="/add"
             element={
-              localStorage.getItem("email") ===
-              "harsh.jolapara110578@marwadiuniversity.ac.in" ? (
+              localStorage.getItem("email") === email ? (
                 <AddJob />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+          <Route
+            path="/managejobs"
+            element={
+              localStorage.getItem("email") === email ? (
+                <ManageJobs />
               ) : (
                 <Navigate to="/" replace />
               )

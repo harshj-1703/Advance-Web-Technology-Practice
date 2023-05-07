@@ -4,6 +4,8 @@ import "../css/navbar.css";
 import myImage from "../assets/images/1.jpg";
 import { signInWithGoogle, auth } from "../firebase-config";
 
+const email = "harsh.jolapara110578@marwadiuniversity.ac.in";
+
 function handleSignOut() {
   auth
     .signOut()
@@ -43,11 +45,15 @@ function Navbar() {
               Home
             </Link>
           </li>
-          {localStorage.getItem("email") ==
-            "harsh.jolapara110578@marwadiuniversity.ac.in" && (
-            <li>
-              <Link to="/add">Add Job</Link>
-            </li>
+          {localStorage.getItem("email") == email && (
+            <>
+              <li>
+                <Link to="/add">Add Job</Link>
+              </li>
+              <li>
+                <Link to="/managejobs">Manage Job</Link>
+              </li>
+            </>
           )}
           {localStorage.getItem("displayName") && (
             <li>

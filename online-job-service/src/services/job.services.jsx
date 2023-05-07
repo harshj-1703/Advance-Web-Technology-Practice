@@ -7,6 +7,7 @@ import {
   getDoc,
   orderBy,
   deleteDoc,
+  updateDoc,
   doc,
   query,
 } from "firebase/firestore";
@@ -27,5 +28,9 @@ export const jobServices = {
   },
   deleteJob: (jobIid) => {
     return deleteDoc(doc(jobCollectionRef, jobIid));
+  },
+  updateJob: (id, newJob) => {
+    const jobDocRef = doc(jobCollectionRef, id);
+    return updateDoc(jobDocRef, newJob);
   },
 };

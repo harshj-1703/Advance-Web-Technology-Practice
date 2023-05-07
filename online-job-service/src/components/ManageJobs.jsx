@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 import "../css/manageJobs.css";
 import { storage } from "../firebase-config";
 import { ref, deleteObject } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 
 function ManageJobs() {
   const [jobs, setJobs] = useState([]);
@@ -115,7 +116,7 @@ function ManageJobs() {
                 <th>Location</th>
                 <th>Mobile</th>
                 <th>Contact</th>
-                <th>Action</th>
+                <th colSpan={2}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -135,6 +136,9 @@ function ManageJobs() {
                   <td>{job.place}</td>
                   <td>{job.mobile}</td>
                   <td>{job.contact}</td>
+                  <td>
+                    <UpdateButton job={job} />
+                  </td>
                   <td>
                     <DeleteJob
                       id={job.id}
@@ -191,6 +195,19 @@ function DeleteJob({ id, setIsDeleted, imageurl }) {
   return (
     <button className="btn btn-danger" onClick={handleDelete}>
       Delete
+    </button>
+  );
+}
+
+function UpdateButton({ job }) {
+  const navigate = useNavigate();
+  const handleUpdate = () => {
+    // console.log(job);
+    navigate("/updatejob", { state: job });
+  };
+  return (
+    <button className="update" onClick={handleUpdate}>
+      Update
     </button>
   );
 }

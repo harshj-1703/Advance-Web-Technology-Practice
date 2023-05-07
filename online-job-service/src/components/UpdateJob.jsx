@@ -1,22 +1,31 @@
 import React, { useState } from "react";
 import { jobServices } from "../services/job.services";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 import { storage } from "../firebase-config";
 import { v4 } from "uuid";
 import { Spinner } from "react-bootstrap";
 import "../css/addJob.css";
+import { useLocation } from "react-router-dom";
 
-function AddJob() {
+function UpdateJob() {
+  const location = useLocation();
+  const jobData = location.state;
+  const _id = jobData.id;
   const [job, setJob] = useState({
-    imageurl: "",
-    name: "",
-    salary: "",
-    experience: "",
-    dailyhours: "",
-    place: "",
-    contact: "",
+    imageurl: jobData.imageurl,
+    name: jobData.name,
+    salary: jobData.salary,
+    experience: jobData.experience,
+    dailyhours: jobData.dailyhours,
+    place: jobData.place,
+    contact: jobData.contact,
     timestamp: "",
-    mobile: "",
+    mobile: jobData.mobile,
   });
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -37,11 +46,11 @@ function AddJob() {
     event.preventDefault();
     setIsLoading(true);
     console.log(job);
-    await addJob(job);
-    event.target.reset();
+    await updateJob(job);
+    // event.target.reset();
   };
 
-  const addJob = async (job) => {
+  const updateJob = async (job) => {
     const timestampOptions = {
       month: "long",
       day: "numeric",
@@ -53,24 +62,38 @@ function AddJob() {
       timeZone: "Asia/Kolkata",
     };
 
-    const imageUrl = await uploadFile();
+    if (imageUpload == null) {
+      await jobServices.updateJob(_id, job);
+      job.timestamp = new Date().toLocaleString("en-US", timestampOptions);
+    } else {
+      const imageUrl = await uploadFile();
 
-    job.timestamp = new Date().toLocaleString("en-US", timestampOptions);
-    job.imageurl = imageUrl;
+      job.timestamp = new Date().toLocaleString("en-US", timestampOptions);
+      job.imageurl = imageUrl;
 
-    await jobServices.addJob(job);
+      await jobServices.updateJob(_id, job);
 
-    setJob({
-      imageurl: "",
-      name: "",
-      salary: "",
-      experience: "",
-      dailyhours: "",
-      place: "",
-      contact: "",
-      timestamp: "",
-      mobile: "",
-    });
+      //image delete
+      const imageRef = ref(storage, jobData.imageurl);
+      // Delete the file
+      deleteObject(imageRef)
+        .then(() => {})
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    // setJob({
+    //   imageurl: "",
+    //   name: "",
+    //   salary: "",
+    //   experience: "",
+    //   dailyhours: "",
+    //   place: "",
+    //   contact: "",
+    //   timestamp: "",
+    //   mobile: "",
+    // });
 
     setIsLoading(false);
     setShowSuccessMessage(true);
@@ -119,13 +142,15 @@ function AddJob() {
   // }
   return (
     <div>
-      <h1 className="addjob-heading">Add Job</h1>
+      <h1 className="addjob-heading">Update Job</h1>
       {isLoading && (
         <div className="spinner-overlay">
           <Spinner animation="border" role="status" variant="primary" />
         </div>
       )}
-      {showSuccessMessage && <div className="msg">Job added successfully!</div>}
+      {showSuccessMessage && (
+        <div className="msg">Job updated successfully!</div>
+      )}
       <form onSubmit={handleSubmit}>
         <label>
           Name:
@@ -201,13 +226,12 @@ function AddJob() {
               setImageUpload(null);
             }}
             onChange={handleFileChange}
-            required
           />
         </label>
-        <button type="submit">Add Job</button>
+        <button type="submit">Update Job</button>
       </form>
     </div>
   );
 }
 
-export default AddJob;
+export default UpdateJob;

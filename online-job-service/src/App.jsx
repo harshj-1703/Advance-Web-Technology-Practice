@@ -4,6 +4,7 @@ import JobLists from "./components/JobLists";
 import JobDetails from "./components/JobDetails";
 import AddJob from "./components/AddJob";
 import Navbar from "./components/Navbar";
+import UpdateJob from "./components/UpdateJob";
 import { Navigate } from "react-router-dom";
 import ManageJobs from "./components/ManageJobs";
 
@@ -31,6 +32,16 @@ const App = () => {
             element={
               localStorage.getItem("email") === email ? (
                 <ManageJobs />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+          <Route
+            path="/updatejob"
+            element={
+              localStorage.getItem("email") === email ? (
+                <UpdateJob />
               ) : (
                 <Navigate to="/" replace />
               )
